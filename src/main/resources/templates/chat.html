@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Chatty web application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="chattyStyle.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Srisakdi" rel="stylesheet">
+</head>
+<body>
+<div>
+    <H1 th:text="${test}" th:name="chatty"></H1>
+</div>
+<div class="row">
+    <div class="columnUser">
+        <div class="user">
+            <img src="../profile.png" alt="Avatar" class="avatar">
+            <form action="#" th:action="@{/}" th:object="${user}" method="post">
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td><label>
+                            <input type="text" th:field="*{userName}" />
+                        </label></td>
+                        <td th:if="${#fields.hasErrors('name')}" th:errors="*{userName}">Name Error</td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="columnRoom">
+        <div class="chatRoom">
+            <div id="chatbox"></div>
+            <form name="message" action="">
+                <label for="usermessage"></label><input name="usermessage" placeholder="Write your message here..." type="text" id="usermessage" />
+                <input name="send" type="submit" id="send" value="Send" />
+            </form>
+            <th:block >User on chat :</th:block> <H1 th:text="${user.getUsername()}" th:name="chatty"></H1>
+        </div>
+    </div>
+</div>
+</body>
+</html>
